@@ -1,0 +1,10 @@
+migrate
+server
+node_modules/
+.parcel-cache/
+!migrate/
+!server/
+.terraform*
+/.*/
+static/
+cloud-sql-proxy

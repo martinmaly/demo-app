@@ -1,0 +1,22 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "parcel watch --no-cache --dist-dir ../cmd/server/static",
+    "release": "parcel build --no-cache --dist-dir ../.build/release"
+  },
+  "source": [
+    "src/index.html"
+  ],
+  "dependencies": {
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "@parcel/packager-raw-url": "latest",
+    "@parcel/transformer-webmanifest": "latest",
+    "parcel": "latest",
+    "process": "latest"
+  }
+}

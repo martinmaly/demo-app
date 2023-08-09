@@ -1,0 +1,10 @@
+.git
+.dockerignore
+.vscode
+.idea
+.readmes
+client/node_modules
+client/dist
+client/.parcel-cache
+.terraform/
+.terraform.lock.hcl
