@@ -16,17 +16,10 @@
 ROOT=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )
 
 : ${PROJECT_ID:=$(gcloud config get project)}
+: ${TAG_NAME:=$(git rev-parse --short HEAD)}
 
 [[ -n "${PROJECT_ID}" ]] || { echo "Invoke PROJECT_ID=project-id ${0}"; exit 1; }
 
 set -x
-
-REGISTRY='demo-application'
-
-gcloud artifacts repositories describe ${REGISTRY} --location=us > /dev/null 2>&1
-if [ $? -ne 0 ]; then
-  gcloud artifacts repositories create ${REGISTRY} --repository-format=docker --location=us
-fi
-
-TAG_NAME="$(git rev-parse --short HEAD)"
+gcloud builds submit --project=${PROJECT_ID} --config="${ROOT}/setup.cloudbuild.yaml" "${ROOT}"
 gcloud builds submit --project=${PROJECT_ID} --config="${ROOT}/cloudbuild.yaml" --substitutions=TAG_NAME=${TAG_NAME} "${ROOT}"

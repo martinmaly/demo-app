@@ -13,15 +13,52 @@
 # limitations under the License.
 
 steps:
-- id: Build Application
-  name: gcr.io/cloud-builders/docker
-  args: ["build", "--no-cache", "-t", "us-docker.pkg.dev/$PROJECT_ID/$_REGISTRY_NAME/server:$TAG_NAME", "-f", "Dockerfile", "."]
+  - id: Build Application
+    name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - --no-cache
+      - -t
+      - "${_REPOSITORY_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${_REPOSITORY_NAME}/server:${TAG_NAME}"
+      - -f
+      - Dockerfile
+      - .
+
+  - id: Push Docker Image
+    name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - "${_REPOSITORY_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${_REPOSITORY_NAME}/server:${TAG_NAME}"
+
+  - id: Deploy Application
+    name: gcr.io/cloud-builders/gcloud
+    args:
+      - alpha
+      - infra-manager
+      - deployments
+      - apply
+      - ${_DEPLOYMENT_NAME}
+      - --local-source=./infra
+      - --input-values=image=${_REPOSITORY_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${_REPOSITORY_NAME}/server:${TAG_NAME},project=${PROJECT_ID}
+      - --service-account=${_SERVICE_ACCOUNT}
+      - --location=${_REGION}
+
+  - id: Initialize Database
+    name: gcr.io/cloud-builders/gcloud
+    script: |
+      #!/usr/bin/env bash
+      echo 'Initializing Database Tables'
+      sleep 5
 
 images:
-- us-docker.pkg.dev/$PROJECT_ID/$_REGISTRY_NAME/server:$TAG_NAME
+  - ${_REPOSITORY_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${_REPOSITORY_NAME}/server:${TAG_NAME}
 
 options:
   dynamic_substitutions: true
 
 substitutions:
-  _REGISTRY_NAME: demo-application
+  _REPOSITORY_NAME: demo-application
+  _REPOSITORY_LOCATION: us
+  _REGION: us-central1
+  _DEPLOYMENT_NAME: demo-application
+#  _SERVICE_ACCOUNT:

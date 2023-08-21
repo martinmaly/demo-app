@@ -13,6 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-[[ -n "${PROJECT_ID}" ]] || { echo "Invoke PROJECT_ID=project-id ${0}"; exit 1; }
+[[ -n "${PROJECT_ID}" ]]          || { echo "PROJECT_ID env variable are required"; exit 1; }
+[[ -n "${REPOSITORY_NAME}" ]]     || { echo "REPOSITORY_NAME env variable are required"; exit 1; }
+[[ -n "${REPOSITORY_LOCATION}" ]] || { echo "REPOSITORY_LOCATION env variable are required"; exit 1; }
+
 set -x
-gcloud builds submit --project=${PROJECT_ID} --config=./src/cloudbuild.yaml --substitutions=_SERVICE_NAME=demo-app,SHORT_SHA=latest .
+gcloud artifacts repositories describe "${REPOSITORY_NAME}" --project="${PROJECT_ID}" --location=us > /dev/null 2>&1
+if [[ $? -ne 0 ]]; then
+  gcloud artifacts repositories create ${REPOSITORY_NAME} --project="${PROJECT_ID}" --location=us --repository-format=docker 
+fi

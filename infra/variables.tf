@@ -22,7 +22,7 @@ variable "project" {
 variable "region" {
   type        = string
   description = "GCP region for provisioning regional resources."
-  default = "us-west1"
+  default     = "us-west1"
 }
 
 variable "image" {

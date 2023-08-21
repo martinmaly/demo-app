@@ -33,7 +33,6 @@ spec:
   - name: image
     description: Application image to use for the deployment.
     type: string
-    default: gcr.io/mmaly-head-start-demo/head-start-app-prebuilt:latest
     required: false
   - name: project
     description: GCP project for provisioning cloud resources.
