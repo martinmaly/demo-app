@@ -21,6 +21,8 @@ metadata:
 spec:
   info:
     title: Go & Javascript Web App
+    author:
+      url: mailto:$$DEVELOPER_EMAIL$$
     source:
       repo: https://github.com/application-templates/demo-app.git
       sourceType: git
