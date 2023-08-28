@@ -193,6 +193,10 @@ resource "google_secret_manager_secret_version" "sql_password" {
 }
 
 resource "google_sql_database_instance" "database" {
+  depends_on = [
+    google_project_service.apis["sqladmin"],
+  ]
+
   name                = "${local.demo_application}-database"
   project             = var.project
   region              = var.region
