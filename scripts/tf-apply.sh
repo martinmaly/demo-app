@@ -22,8 +22,8 @@ ROOT=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )
 
 set -x
 
-TAG_NAME=${TAG_NAME:-$(git rev-parse --short HEAD)}
-IMAGE_NAME="us-docker.pkg.dev/${PROJECT_ID}/demo-application/server:$TAG_NAME"
+SHORT_SHA=${SHORT_SHA:-$(git rev-parse --short HEAD)}
+IMAGE_NAME="us-docker.pkg.dev/${PROJECT_ID}/demo-application/server:$SHORT_SHA"
 
 cd ${ROOT}/infra && \
   terraform apply \

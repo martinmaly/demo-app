@@ -16,11 +16,11 @@ steps:
 - id: Build App
   dir: src
   name: gcr.io/cloud-builders/docker
-  args: ["build", "--no-cache", "-t", "gcr.io/$PROJECT_ID/sp-dh-demo-application:$TAG_NAME", "-f", "./Dockerfile", "."]
+  args: ["build", "--no-cache", "-t", "gcr.io/$PROJECT_ID/sp-dh-demo-application:$SHORT_SHA", "-f", "./Dockerfile", "."]
 - id: Build SQL Admin
   dir: src
   name: gcr.io/cloud-builders/docker
-  args: ["build", "--no-cache", "-t", "gcr.io/$PROJECT_ID/sp-dh-sql-admin:$TAG_NAME", "-f", "./Dockerfile.mysql", "."]
+  args: ["build", "--no-cache", "-t", "gcr.io/$PROJECT_ID/sp-dh-sql-admin:$SHORT_SHA", "-f", "./Dockerfile.mysql", "."]
 images:
-  - gcr.io/$PROJECT_ID/sp-dh-demo-application:$TAG_NAME
-  - gcr.io/$PROJECT_ID/sp-dh-sql-admin:$TAG_NAME
+  - gcr.io/$PROJECT_ID/sp-dh-demo-application:$SHORT_SHA
+  - gcr.io/$PROJECT_ID/sp-dh-sql-admin:$SHORT_SHA

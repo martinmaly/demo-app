@@ -16,12 +16,12 @@
 ROOT=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )
 
 : ${PROJECT_ID:=$(gcloud config get project)}
-: ${TAG_NAME:=$(git rev-parse --short HEAD)}
+: ${SHORT_SHA:=$(git rev-parse --short HEAD)}
 
 [[ -n "${PROJECT_ID}" ]] || { echo "Invoke PROJECT_ID=project-id ${0}"; exit 1; }
 
 set -x
 gcloud builds submit --project=${PROJECT_ID} --config="${ROOT}/setup.cloudbuild.yaml" "${ROOT}"
 gcloud builds submit --project=${PROJECT_ID} --config="${ROOT}/cloudbuild.yaml" \
-  --substitutions=TAG_NAME=${TAG_NAME},_SERVICE_ACCOUNT=projects/mmaly-dev-01/serviceAccounts/demo-application-deployer@mmaly-dev-01.iam.gserviceaccount.com \
+  --substitutions=SHORT_SHA=${SHORT_SHA},_SERVICE_ACCOUNT=projects/mmaly-dev-01/serviceAccounts/demo-application-deployer@mmaly-dev-01.iam.gserviceaccount.com \
   "${ROOT}"
