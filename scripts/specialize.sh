@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
 while IFS="=" read -r key value; do
-  echo "Replacing ${key} --> ${value}"
-  grep -rl '\$\$'"$key"'\$\$' ./* | xargs sed -i 's/\$\$'"$key"'\$\$/'"$value"'/g'
+  if [[ -n "${key}" ]]; then
+    echo "Replacing ${key} --> ${value}"
+    grep -rl '\$\$'"$key"'\$\$' ./* | xargs --no-run-if-empty sed -i 's/\$\$'"$key"'\$\$/'"$value"'/g'
+  fi
 done <specialize.vars
+
+exit 0
