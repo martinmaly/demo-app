@@ -16,11 +16,12 @@
 
 locals {
   apis = {
-    run           = "run.googleapis.com"
-    cloudbuild    = "cloudbuild.googleapis.com"
-    sqladmin      = "sqladmin.googleapis.com"
-    secretmanager = "secretmanager.googleapis.com"
-    iam           = "iam.googleapis.com"
+    run              = "run.googleapis.com"
+    cloudbuild       = "cloudbuild.googleapis.com"
+    sqladmin         = "sqladmin.googleapis.com"
+    secretmanager    = "secretmanager.googleapis.com"
+    iam              = "iam.googleapis.com"
+    servicedirectory = "servicedirectory.googleapis.com"
   }
 
   demo_application = "demo-application"

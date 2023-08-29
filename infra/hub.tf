@@ -15,6 +15,10 @@
  */
 
 resource "google_service_directory_namespace" "apphub" {
+  depends_on = [
+    google_project_service.apis["servicedirectory"]
+  ]
+
   provider     = google-beta
   project      = var.project
   namespace_id = "$$APPLICATION_NAME$$"
