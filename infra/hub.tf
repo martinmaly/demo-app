@@ -33,5 +33,6 @@ resource "google_service_directory_service" "name" {
   metadata = {
     criticality = "HIGH"        # TODO: make a variable
     location    = "us-central1" # TODO: make a variable
+    uri         = google_cloud_run_v2_service.backend.uri
   }
 }
