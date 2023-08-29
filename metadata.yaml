@@ -22,7 +22,7 @@ spec:
   info:
     title: Go & Javascript Web App
     author:
-      url: mailto:$$DEVELOPER_EMAIL$$
+      url: mailto:$$OWNER$$
     source:
       repo: https://github.com/application-templates/demo-app.git
       sourceType: git
