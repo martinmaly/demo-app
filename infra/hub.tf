@@ -22,7 +22,7 @@ resource "google_service_directory_namespace" "apphub" {
   provider     = google-beta
   project      = var.project
   namespace_id = "$$APPLICATION_NAME$$"
-  location     = "us-central1" # TODO: make a variable
+  location     = "$$REGION$$"
 }
 
 resource "google_service_directory_service" "name" {
@@ -31,8 +31,9 @@ resource "google_service_directory_service" "name" {
   namespace  = google_service_directory_namespace.apphub.id
 
   metadata = {
-    criticality = "HIGH"        # TODO: make a variable
-    location    = "us-central1" # TODO: make a variable
+    criticality = "$$CRITICALITY$$"
+    location    = "$$REGION$$"
+    owner       = "$$OWNER$$"
     uri         = google_cloud_run_v2_service.backend.uri
   }
 }
