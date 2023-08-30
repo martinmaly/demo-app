@@ -62,3 +62,6 @@ substitutions:
   _REGION: us-central1
   _DEPLOYMENT_NAME: demo-application
 #  _SERVICE_ACCOUNT:
+
+tags:
+  - build-and-deploy

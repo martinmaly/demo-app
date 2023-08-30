@@ -34,3 +34,6 @@ steps:
 substitutions:
   _REPOSITORY_NAME: demo-application
   _REPOSITORY_LOCATION: us
+
+tags:
+  - "one-time-setup"
