@@ -12,17 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-parts:
-
-  repo: &partsRepo
-    type: source
-    attrs:
-      provider: GitHub
-      organization: $$GITHUB_ORGANIZATION$$
-      repo: $$GITHUB_REPOSITORY$$
-
 views:
-
   - name: solutions-platform-$$APPLICATION_NAME$$
     enabled: True
     type: application
@@ -33,31 +23,34 @@ views:
         and a web UI client implemented in JavaScript.
         <p>Owner: $$OWNER$$
         <p>Criticality: $$CRITICALITY$$
-
     sdlc:
-    - *partsRepo
-    - type: build
-      attrs:
-        provider: Google Cloud Build
-        project: $$PROJECT_ID$$
-        region: $$REGION$$
-        tag: one-time-setup
-    - type: registry
-      attrs:
-        provider: Google Artifact Registry
-        project: $$PROJECT_ID$$
-        region: us
-        repo: demo-application
-        type: Docker
-    - type: deploy
-      attrs:
-        provider: Google Cloud Build
-        project: $$PROJECT_ID$$
-        region: $$REGION$$
-        tag: build-and-deploy
-    - type: service
-      attrs:       
-        provider: Google Cloud Run
-        project: $$PROJECT_ID$$
-        region: $$REGION$$
-        service: demo-application-backend
+      - type: source
+        attrs:
+          provider: GitHub
+          organization: $$GITHUB_ORGANIZATION$$
+          repo: $$GITHUB_REPOSITORY$$
+      - type: build
+        attrs:
+          provider: Google Cloud Build
+          project: $$PROJECT_ID$$
+          region: $$REGION$$
+          tag: one-time-setup
+      - type: registry
+        attrs:
+          provider: Google Artifact Registry
+          project: $$PROJECT_ID$$
+          region: us
+          repo: demo-application
+          type: Docker
+      - type: deploy
+        attrs:
+          provider: Google Cloud Build
+          project: $$PROJECT_ID$$
+          region: $$REGION$$
+          tag: build-and-deploy
+      - type: service
+        attrs:
+          provider: Google Cloud Run
+          project: $$PROJECT_ID$$
+          region: $$REGION$$
+          service: demo-application-backend
