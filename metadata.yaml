@@ -29,7 +29,11 @@ spec:
       dir: infra
     description:
       tagline: Go & Javascript Web App
-      detailed: Go & Javascript Web App
+      detailed: >
+        A three-tier web application. The server is implemented in Go and client web UI in JavaScript.
+        Cloud SQL (MySQL) is used as a database backend.
+        The server implementation is minimal to serve as a useful starting point for your application.
+        The server exposes a simple web API to serve current time retrieved from the database.
       architecture:
         - Cloud Run
         - Cloud SQL
