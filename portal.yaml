@@ -17,7 +17,7 @@ views:
     enabled: True
     type: application
     application:
-      name: Go & JavaScript Web App
+      name: Go & JavaScript Web App ($$APPLICATION_NAME$$)
       desc: >
         A three-tier web application with backend implemented in <a href="https://go.dev/">golang</a>
         and a web UI client implemented in JavaScript.
