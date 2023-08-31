@@ -54,3 +54,11 @@ views:
           project: $$PROJECT_ID$$
           region: $$REGION$$
           service: demo-application-backend
+      - type: service
+        attrs:
+          provider: Google Service Directory
+          project: $$PROJECT_ID$$
+          region: $$REGION$$
+          includes:
+            - namespace: $$APPLICATION_NAME$$
+              service: $$APPLICATION_NAME$$
