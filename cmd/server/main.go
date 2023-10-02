@@ -31,12 +31,6 @@ var (
 )
 
 func main() {
-	if err := run(); err != nil {
-		log.Fatal(err)
-	}
-}
-
-func run() error {
 	// Initialize template parameters.
 	service = os.Getenv("K_SERVICE")
 	if service == "" {
@@ -48,6 +42,12 @@ func run() error {
 		revision = "???"
 	}
 
+	if err := run(); err != nil {
+		log.Fatal(err)
+	}
+}
+
+func run() error {
 	db, err := mysql.ConnectToDatabase()
 	if err != nil {
 		return err
