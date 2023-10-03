@@ -24,4 +24,4 @@ gsutil mb "gs://${BUCKET}" > /dev/null 2>&1 || echo "Bucket ${BUCKET} likely alr
 . "${ROOT}/scripts/tf-backend.sh"
 
 cd ${ROOT}/infra && \
-  terraform init -backend-config="bucket=${BUCKET}"
+  terraform init -backend-config="bucket=${BUCKET}" "${@}"
