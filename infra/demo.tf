@@ -167,10 +167,6 @@ resource "google_secret_manager_secret" "sql_password" {
   ]
   secret_id = "${local.demo_application}-sql-password"
   project   = var.project
-
-  replication {
-    automatic = true
-  }
 }
 
 resource "google_secret_manager_secret_iam_member" "sql_password" {
