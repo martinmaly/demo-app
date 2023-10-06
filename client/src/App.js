@@ -19,6 +19,7 @@ import React, { useEffect, useState } from 'react';
 
 export function App() {
   const [result, setResult] = useState(null);
+  const [now, setNow] = useState(null);
 
   const fetchTime = () => {
     fetch("/time")
@@ -32,6 +33,7 @@ export function App() {
       })
       .then(result => {
         setResult(result);
+        setNow(new Date(result.now));
       })
       .catch(error => {
         setResult({
@@ -49,17 +51,19 @@ export function App() {
       }
       {result && !result.error &&
         <>
-          <h1>Demo Application</h1>
-          <h2>$$GREETING$$</h2>
-          Server time is: {result.now}<br />
-          Service: {result.service}<br />
-          Revision: {result.revision}<br />
-          <br />
+          <h1>$$GREETING$$</h1>
+          {
+            now && <p>
+              Server Date: {now.toLocaleDateString()} <br />
+              Server Time: {now.toLocaleTimeString()}
+            </p>
+          }
         </>
       }
       <button onClick={fetchTime} className="button">
         Refresh
       </button>
+      <div className="Footer">App Templating Demo Application</div>
     </div>
   );
 }
