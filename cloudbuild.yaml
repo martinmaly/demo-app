@@ -54,7 +54,7 @@ steps:
 substitutions:
   _REPOSITORY_NAME: demo-application
   _REPOSITORY_LOCATION: us
-  _REGION: $$REGION$$
+  _REGION: us-west1
   _DEPLOYMENT_NAME: demo-application
 
 images:
