@@ -35,7 +35,6 @@ steps:
     wait_for:
       - "Push Docker Image"
     args:
-      - alpha
       - infra-manager
       - deployments
       - apply
