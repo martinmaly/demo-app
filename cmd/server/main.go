@@ -86,6 +86,12 @@ func queryDatabaseTime() (time.Time, error) {
 	return now, nil
 }
 
+type TimeResponse struct {
+	Now      time.Time `json:"now,omitempty"`
+	Service  string    `json:"service,omitempty"`
+	Revision string    `json:"revision,omitempty"`
+}
+
 // timeHandler responds to requests by returning current time on the SQL Server
 func timeHandler(w http.ResponseWriter, r *http.Request) {
 	now, err := queryDatabaseTime()
@@ -100,11 +106,7 @@ func timeHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	} else {
 		status = http.StatusOK
-		result = struct {
-			Now      time.Time `json:"now,omitempty"`
-			Service  string    `json:"service,omitempty"`
-			Revision string    `json:"revision,omitempty"`
-		}{
+		result = TimeResponse{
 			Now:      now,
 			Service:  service,
 			Revision: revision,
