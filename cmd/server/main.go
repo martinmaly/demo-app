@@ -90,6 +90,7 @@ type TimeResponse struct {
 	Now      time.Time `json:"now,omitempty"`
 	Service  string    `json:"service,omitempty"`
 	Revision string    `json:"revision,omitempty"`
+	Message  string    `json:"message,omitempty"`
 }
 
 // timeHandler responds to requests by returning current time on the SQL Server
@@ -110,6 +111,7 @@ func timeHandler(w http.ResponseWriter, r *http.Request) {
 			Now:      now,
 			Service:  service,
 			Revision: revision,
+			Message:  "Running on Google Cloud!",
 		}
 	}
 

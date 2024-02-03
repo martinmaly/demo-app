@@ -51,7 +51,7 @@ export function App() {
       }
       {result && !result.error &&
         <>
-          <h1>Hello, World!</h1>
+          <h1>{result.message || "Hello, World!"}</h1>
           {
             now && <p>
               Server Date: {now.toLocaleDateString()} <br />
